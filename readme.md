@@ -1,6 +1,8 @@
 # Laravel Zendesk
 
-This package provides a ```Zendesk``` facade that acts as a wrapper to the [zendesk/zendesk_api_client_php](https://github.com/zendesk/zendesk_api_client_php) package.
+This package provides integration with the Zendesk API. It supports creating tickets, retrieving and updating tickets, deleting tickets, etc.
+
+The package simply provides a ```Zendesk``` facade that acts as a wrapper to the [zendesk/zendesk_api_client_php](https://github.com/zendesk/zendesk_api_client_php) package.
 
 **NB:** Currently only supports token-based authentication.
 
@@ -8,7 +10,7 @@ This package provides a ```Zendesk``` facade that acts as a wrapper to the [zend
 
 Install via composer by adding the following to your composer.json:
 
-```
+```json
     ...
     "require": {
         "huddledigital/zendesk-laravel": "~1.0"
@@ -18,7 +20,7 @@ Install via composer by adding the following to your composer.json:
 
 Add service provider to ```config/app.php```:
 
-```
+```php
     ...
     'Huddle\Zendesk\Providers\ZendeskServiceProvider',
     ...
@@ -26,7 +28,7 @@ Add service provider to ```config/app.php```:
 
 Add alias to ```config/app.php```:
 
-```
+```php
     ...
     'Zendesk' => 'Huddle\Zendesk\Facades\Zendesk',
     ...
@@ -46,7 +48,7 @@ Set your configuration using **environment variables**, either in your ```.env``
 
 The ```Zendesk``` facade acts as a wrapper for an instance of the ```Zendesk\API\Client``` class. Any methods available on this class ([documentation here](https://github.com/zendesk/zendesk_api_client_php#usage)) are available through the facade. for example:
 
-```
+```php
 // Get all tickets
 Zendesk::tickets()->findAll();
 
@@ -72,7 +74,7 @@ Zendesk::ticket(123)->delete();
 
 If you'd prefer not to use the facade, you can skip adding the alias to ```config/app.php``` and instead inject ```Huddle\Zendesk\Services\ZendeskService``` into your class. You can then use all of the same methods on this object as you would on the facade.
 
-```
+```php
 <?php
 
 use Huddle\Zendesk\Services\ZendeskService;
