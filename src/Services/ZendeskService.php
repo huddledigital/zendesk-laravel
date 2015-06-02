@@ -1,6 +1,6 @@
 <?php namespace Huddle\Zendesk\Services;
 
-use Config, Exception;
+use Config, InvalidArgumentException, BadMethodCallException;
 use Zendesk\API\Client;
 
 class ZendeskService {
@@ -16,7 +16,7 @@ class ZendeskService {
         $this->username = config('zendesk-laravel.username');
         $this->token = config('zendesk-laravel.token');
         if(!$this->subdomain || !$this->username || !$this->token) {
-            throw new Exception('Please set ZENDESK_SUBDOMAIN, ZENDESK_USERNAME and ZENDESK_TOKEN environment variables.');
+            throw new InvalidArgumentException('Please set ZENDESK_SUBDOMAIN, ZENDESK_USERNAME and ZENDESK_TOKEN environment variables.');
         }
         $this->client = new Client($this->subdomain, $this->username);
         $this->client->setAuth('token',$this->token);
@@ -30,6 +30,8 @@ class ZendeskService {
     public function __call($method, $args) {
         if(is_callable([$this->client,$method])) {
             return call_user_func_array([$this->client,$method],$args);
+        } else {
+            throw new BadMethodCallException("Method $method does not exist");
         }
     }
 
