@@ -12,9 +12,9 @@ class ZendeskService {
      * @throws Exception
      */
     public function __construct() {
-        $this->subdomain = Config::get('zendesk-laravel.subdomain');
-        $this->username = Config::get('zendesk-laravel.username');
-        $this->token = Config::get('zendesk-laravel.token');
+        $this->subdomain = config('zendesk-laravel.subdomain');
+        $this->username = config('zendesk-laravel.username');
+        $this->token = config('zendesk-laravel.token');
         if(!$this->subdomain || !$this->username || !$this->token) {
             throw new Exception('Please set ZENDESK_SUBDOMAIN, ZENDESK_USERNAME and ZENDESK_TOKEN environment variables.');
         }
