@@ -38,7 +38,7 @@ Add alias to ```config/app.php```:
 
 Set your configuration using **environment variables**, either in your ```.env``` file or on your server's control panel:
 
-- ```ZENDESK_SUBDOMAIN``` - the subdomain for your Zendesk organisation.
+- ```ZENDESK_SUBDOMAIN``` - the subdomain part of your Zendesk organisation URL e.g. if your URL is http://huddledigital.zendesk.com use ```huddledigital```
 - ```ZENDESK_USERNAME``` - the username for the authenticating account.
 - ```ZENDESK_TOKEN``` - the access token. To generate an access token within Zendesk, click on Settings, API, enable Token Access and click 'add new token'.
 
