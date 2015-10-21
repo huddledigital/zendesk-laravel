@@ -19,7 +19,7 @@ class ZendeskService {
             throw new InvalidArgumentException('Please set ZENDESK_SUBDOMAIN, ZENDESK_USERNAME and ZENDESK_TOKEN environment variables.');
         }
         $this->client = new HttpClient($this->subdomain, $this->username);
-        $this->client->setAuth('token',$this->token);
+        $this->client->setAuth('basic', ['username' => $this->username, 'token' => $this->token]);
     }
 
     /**
