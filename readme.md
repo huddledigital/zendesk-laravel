@@ -13,7 +13,7 @@ Install via composer by adding the following to your composer.json:
 ```json
     ...
     "require": {
-        "huddledigital/zendesk-laravel": "~1.0"
+        "huddledigital/zendesk-laravel": "~2.0"
     }
     ...
 ```
