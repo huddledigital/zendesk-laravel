@@ -13,7 +13,7 @@
     "require": {
         "php": ">=5.4.0",
         "laravel/framework": "5.*",
-        "zendesk/zendesk_api_client_php": "~1.0"
+        "zendesk/zendesk_api_client_php": "2.*"
     },
     "autoload": {
         "psr-4": {

@@ -1,7 +1,7 @@
 <?php namespace Huddle\Zendesk\Services;
 
 use Config, InvalidArgumentException, BadMethodCallException;
-use Zendesk\API\Client;
+use Zendesk\API\HttpClient;
 
 class ZendeskService {
 
@@ -18,8 +18,8 @@ class ZendeskService {
         if(!$this->subdomain || !$this->username || !$this->token) {
             throw new InvalidArgumentException('Please set ZENDESK_SUBDOMAIN, ZENDESK_USERNAME and ZENDESK_TOKEN environment variables.');
         }
-        $this->client = new Client($this->subdomain, $this->username);
-        $this->client->setAuth('token',$this->token);
+        $this->client = new HttpClient($this->subdomain, $this->username);
+        $this->client->setAuth('basic', ['username' => $this->username, 'token' => $this->token]);
     }
 
     /**
