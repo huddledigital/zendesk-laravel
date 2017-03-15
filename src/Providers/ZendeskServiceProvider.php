@@ -1,5 +1,6 @@
 <?php namespace Huddle\Zendesk\Providers;
 
+use Huddle\Zendesk\Services\ZendeskService;
 use Zendesk;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,9 +19,16 @@ class ZendeskServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function register() {
+	    $packageName = 'zendesk-laravel';
+	    $configPath = __DIR__.'/../../config/zendesk-laravel.php';
+
         $this->mergeConfigFrom(
-            __DIR__.'/../../config/zendesk-laravel.php', 'zendesk-laravel'
+            $configPath, $packageName
         );
+
+        $this->publishes([
+            $configPath => config_path(sprintf('%s.php', $packageName)),
+        ]);
 	}
 
 	/**
@@ -30,17 +38,7 @@ class ZendeskServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-        $this->app->bind('zendesk','Huddle\Zendesk\Services\ZendeskService');
-	}
-
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides()
-	{
-		return array();
+        $this->app->bind('zendesk', ZendeskService::class);
 	}
 
 }
