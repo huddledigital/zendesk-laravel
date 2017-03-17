@@ -2,51 +2,70 @@
 
 This package provides integration with the Zendesk API. It supports creating tickets, retrieving and updating tickets, deleting tickets, etc.
 
-The package simply provides a ```Zendesk``` facade that acts as a wrapper to the [zendesk/zendesk_api_client_php](https://github.com/zendesk/zendesk_api_client_php) package.
+The package simply provides a `Zendesk` facade that acts as a wrapper to the [zendesk/zendesk_api_client_php](https://github.com/zendesk/zendesk_api_client_php) package.
 
 **NB:** Currently only supports token-based authentication.
 
 ## Installation
 
-Install via composer by adding the following to your composer.json:
+You can install this package via Composer using:
 
-```json
-    ...
-    "require": {
-        "huddledigital/zendesk-laravel": "~2.0"
-    }
-    ...
+```bash
+composer require huddledigital/zendesk-laravel
 ```
 
-Add service provider to ```config/app.php```:
+You must also install the service provider.
 
 ```php
+// config/app.php
+'providers' => [
     ...
-    'Huddle\Zendesk\Providers\ZendeskServiceProvider',
+    Huddle\Zendesk\Providers\ZendeskServiceProvider::class,
     ...
+];
 ```
 
-Add alias to ```config/app.php```:
+If you want to make use of the facade you must install it as well.
 
 ```php
-    ...
-    'Zendesk' => 'Huddle\Zendesk\Facades\Zendesk',
-    ...
+// config/app.php
+'aliases' => [
+    ..
+    'Zendesk' => Huddle\Zendesk\Facades\Zendesk::class,
+];
 ```
 
 ## Configuration
 
-Set your configuration using **environment variables**, either in your ```.env``` file or on your server's control panel:
 
-- ```ZENDESK_SUBDOMAIN``` - the subdomain part of your Zendesk organisation URL e.g. if your URL is http://huddledigital.zendesk.com use ```huddledigital```
-- ```ZENDESK_USERNAME``` - the username for the authenticating account.
-- ```ZENDESK_TOKEN``` - the access token. To generate an access token within Zendesk, click on Settings, API, enable Token Access and click 'add new token'.
+To publish the config file to `app/config/zendesk-laravel.php` run:
+
+```bash
+php artisan vendor:publish --provider="Huddle\Zendesk\Providers\ZendeskServiceProvider"
+```
+
+
+Set your configuration using **environment variables**, either in your `.env` file or on your server's control panel:
+
+- `ZENDESK_SUBDOMAIN`
+  
+The subdomain part of your Zendesk organisation URL.
+
+e.g. http://huddledigital.zendesk.com use **huddledigital**  
+
+- `ZENDESK_USERNAME`    
+
+The username for the authenticating account.
+
+- `ZENDESK_TOKEN`    
+
+The API access token. You can create one at: `https://SUBDOMAIN.zendesk.com/agent/admin/api/settings`
 
 ## Usage
 
 ### Facade
 
-The ```Zendesk``` facade acts as a wrapper for an instance of the ```Zendesk\API\Client``` class. Any methods available on this class ([documentation here](https://github.com/zendesk/zendesk_api_client_php#usage)) are available through the facade. for example:
+The `Zendesk` facade acts as a wrapper for an instance of the `Zendesk\API\Client` class. Any methods available on this class ([documentation here](https://github.com/zendesk/zendesk_api_client_php#usage)) are available through the facade. for example:
 
 ```php
 // Get all tickets
@@ -72,7 +91,7 @@ Zendesk::ticket(123)->delete();
 
 ### Dependency injection
 
-If you'd prefer not to use the facade, you can skip adding the alias to ```config/app.php``` and instead inject ```Huddle\Zendesk\Services\ZendeskService``` into your class. You can then use all of the same methods on this object as you would on the facade.
+If you'd prefer not to use the facade, you can skip adding the alias to `config/app.php` and instead inject `Huddle\Zendesk\Services\ZendeskService` into your class. You can then use all of the same methods on this object as you would on the facade.
 
 ```php
 <?php
