@@ -35,4 +35,17 @@ class ZendeskService {
         }
     }
 
+    /**
+     * Pass any property calls onto $this->client
+     *
+     * @return mixed
+     */
+    public function __get($property) {
+        if(property_exists($this->client,$property)) {
+            return $this->client->{$property};
+        } else {
+            throw new BadMethodCallException("Property $property does not exist");
+        }
+    }
+
 }
