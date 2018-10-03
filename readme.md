@@ -16,6 +16,8 @@ composer require huddledigital/zendesk-laravel
 
 You must also install the service provider.
 
+> Laravel 5.5+ users: this step may be skipped, as the package supports auto discovery.
+
 ```php
 // config/app.php
 'providers' => [
@@ -48,16 +50,16 @@ php artisan vendor:publish --provider="Huddle\Zendesk\Providers\ZendeskServicePr
 Set your configuration using **environment variables**, either in your `.env` file or on your server's control panel:
 
 - `ZENDESK_SUBDOMAIN`
-  
+
 The subdomain part of your Zendesk organisation URL.
 
-e.g. http://huddledigital.zendesk.com use **huddledigital**  
+e.g. http://huddledigital.zendesk.com use **huddledigital**
 
-- `ZENDESK_USERNAME`    
+- `ZENDESK_USERNAME`
 
 The username for the authenticating account.
 
-- `ZENDESK_TOKEN`    
+- `ZENDESK_TOKEN`
 
 The API access token. You can create one at: `https://SUBDOMAIN.zendesk.com/agent/admin/api/settings`
 
@@ -99,11 +101,11 @@ If you'd prefer not to use the facade, you can skip adding the alias to `config/
 use Huddle\Zendesk\Services\ZendeskService;
 
 class MyClass {
-    
+
     public function __construct(ZendeskService $zendesk_service) {
         $this->zendesk_service = $zendesk_service;
     }
-    
+
     public function addTicket() {
         $this->zendesk_service->tickets()->create([
               'subject' => 'Subject',
@@ -113,8 +115,8 @@ class MyClass {
               'priority' => 'normal'
         ]);
     }
-    
+
 }
 ```
-        
+
 This package is available under the [MIT license](http://opensource.org/licenses/MIT).
