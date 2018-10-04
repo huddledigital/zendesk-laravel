@@ -15,6 +15,16 @@
         "illuminate/support": "~5.4",
         "zendesk/zendesk_api_client_php": "2.*"
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Huddle\\Zendesk\\Providers\\ZendeskServiceProvider"
+            ],
+            "aliases": {
+                "Zendesk": "Huddle\\Zendesk\\Facades\\Zendesk"
+            }
+        }
+    },
     "autoload": {
         "psr-4": {
             "Huddle\\Zendesk\\": "src"
