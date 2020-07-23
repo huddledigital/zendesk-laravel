@@ -40,7 +40,7 @@ class ZendeskServiceProvider extends ServiceProvider {
     public function boot()
     {
         $this->app->bind('zendesk', function () {
-            $driver = config('newsletter.driver', 'api');
+            $driver = config('zendesk-laravel.driver', 'api');
             if (is_null($driver) || $driver === 'log') {
                 return new NullService($driver === 'log');
             }
