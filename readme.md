@@ -63,6 +63,10 @@ The username for the authenticating account.
 
 The API access token. You can create one at: `https://SUBDOMAIN.zendesk.com/agent/admin/api/settings`
 
+- `ZENDESK_DRIVER` _(Optional)_
+
+Set this to `null` or `log` to prevent calling the Zendesk API directly from your environment.
+
 ## Usage
 
 ### Facade
