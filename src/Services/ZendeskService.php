@@ -13,13 +13,17 @@ class ZendeskService {
      */
     public function __construct() {
         $this->subdomain = config('zendesk-laravel.subdomain');
-        $this->username = config('zendesk-laravel.username');
+        $this->username = config('zendesk-laravel.username', '');
         $this->token = config('zendesk-laravel.token');
-        if(!$this->subdomain || !$this->username || !$this->token) {
-            throw new InvalidArgumentException('Please set ZENDESK_SUBDOMAIN, ZENDESK_USERNAME and ZENDESK_TOKEN environment variables.');
+        if(!$this->subdomain || !$this->token) {
+            throw new InvalidArgumentException('Please set ZENDESK_SUBDOMAIN and ZENDESK_TOKEN environment variables.');
         }
         $this->client = new HttpClient($this->subdomain, $this->username);
-        $this->client->setAuth('basic', ['username' => $this->username, 'token' => $this->token]);
+        if ($this->username != '') {
+            $this->client->setAuth('basic', ['username' => $this->username, 'token' => $this->token]);
+        } else {
+            $this->client->setAuth('oauth', ['token' => $this->token]);
+        }
     }
 
     /**
