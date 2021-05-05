@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Facade;
 
-class Zendesk extends Facade {
+/**
+ * @mixin \Zendesk\API\HttpClient
+ */
+class Zendesk extends Facade
+{
 
     /**
      * Return facade accessor.
