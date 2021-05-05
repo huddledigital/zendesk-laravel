@@ -4,6 +4,7 @@
     "description": "Laravel wrapper for zendesk/zendesk_api_client_php package",
     "keywords": ["zendesk"],
     "homepage": "http://workwithhuddle.com",
+    "license": "MIT",
     "authors": [
         {
             "name": "Huddle Digital Ltd",
