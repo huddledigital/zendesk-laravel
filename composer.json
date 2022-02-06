@@ -2,7 +2,9 @@
     "name": "huddledigital/zendesk-laravel",
     "type": "library",
     "description": "Laravel wrapper for zendesk/zendesk_api_client_php package",
-    "keywords": ["zendesk"],
+    "keywords": [
+        "zendesk"
+    ],
     "homepage": "http://workwithhuddle.com",
     "license": "MIT",
     "authors": [
@@ -13,7 +15,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "~5.4|^6.0|^7.0|^8.0",
+        "illuminate/support": "~5.4|^6.0|^7.0|^8.0|^9.0",
         "zendesk/zendesk_api_client_php": "2.*"
     },
     "extra": {
