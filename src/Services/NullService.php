@@ -24,4 +24,15 @@ class NullService {
 
         return $this;
     }
+    
+    public function __get(string $name)
+    {
+        if ($this->logCalls) {
+            Log::debug('Called Huddle Zendesk facade property: '.$name);
+
+            return new self;
+        }
+
+        return $this;
+    }
 }
